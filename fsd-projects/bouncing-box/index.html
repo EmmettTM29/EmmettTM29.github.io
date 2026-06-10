@@ -8,7 +8,7 @@
       .box {
         width: 70px;
         height: 70px;
-        background-color: teal;
+        background-color: rgb(0, 128, 58);
         font-size: 300%;
         text-align: center;
         user-select: none;
@@ -42,6 +42,7 @@
         var box = jQuery(".box"); // reference to the HTML .box element
         var board = jQuery(".board"); // reference to the HTML .board element
         var boardWidth = board.width(); // the maximum X-Coordinate of the screen
+        var boardHeight = jQuery(window).height(); // the maximum Y-Coordinate of the screen
 
         // update the boardWidth variable when the window is resized
         jQuery(window).on("resize", function () {
@@ -55,8 +56,9 @@
         box.on("click", handleBoxClick);
 
         // moves the Box to a new position on the screen along the X-Axis
-        function moveBoxTo(newPositionX) {
+        function moveBoxTo(newPositionX, newPositionY) {
           box.css("left", newPositionX);
+          box.css("top", newPositionY);
         }
 
         // changes the text displayed on the Box
@@ -69,9 +71,11 @@
         //////////////////////////////////////////////////////////////////
 
         // TODO 2 - Variable declarations
-
-
-
+        var posX = 0;
+        var posY = 0;
+        var points = 0;
+        var speedX = 10;
+        var speedY = 10;
 
 
         /**
@@ -81,11 +85,31 @@
          */
         function update() {
 
-        
-
+          posX += speedX;
+          posY += speedY
+          moveBoxTo(posX, posY);
           
-        }
+          //the following two are connected/related; they are the same code for the x and y
 
+          if (posX > boardWidth - 35) {
+            speedX *= -1
+          }
+
+          if (posY > boardHeight - 35) {
+            speedY *= -1
+          }
+
+          //the following two are connected/related; they are the same code for the x and y
+
+          if (posX < 0) {
+            speedX *= -1
+          }
+
+          if (posY < 0) {
+            speedY *= -1
+          } 
+
+        }
         /**
          * This Function will be called each time the box is clicked.
          * Each time it is called, it should perform each of the following actions:
@@ -94,14 +118,13 @@
          * - move the box to the left side of the screen.
          */
         function handleBoxClick() {
-
-
-
-
+          posX = 0;
+          posY = 0;
+          points++;
+          speedX = 3 * points +10;
+          speedY = speedX
+          changeBoxText(points);
         }
-
-
-        
       })();
     </script>
   </body>

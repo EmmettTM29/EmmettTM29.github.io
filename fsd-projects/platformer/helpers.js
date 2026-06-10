@@ -115,6 +115,7 @@ function changeAnimationType() {
     } else if (player.onGround) {
       if (keyPress.down) {
         currentAnimationType = animationTypes.duck;
+        let hitBoxHeight = 5 * playerScale
         if (duckTimer < DUCK_COUNTER_IDLE_VALUE) {
           // not using index 0 because the animation is too slow then
           frameIndex = 3;
@@ -125,6 +126,7 @@ function changeAnimationType() {
         currentAnimationType === animationTypes.walk
       ) {
         currentAnimationType = animationTypes.frontIdle;
+        let hitBoxHeight = 105 * playerScale
       }
     }
   }
