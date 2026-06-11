@@ -8,8 +8,10 @@
       .box {
         width: 256px;
         height: 128px;
-        background-image: url(https://images.vexels.com/media/users/3/143391/isolated/lists/7ade5b7a070aaa381f8d8664ef0d66a2-dvd-logo-red.png);
-        background-color: #8dcb69;
+        background-image: url(dvd.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: #408edd;
         font-size: 300%;
         text-align: center;
         user-select: none;
@@ -97,11 +99,11 @@
           
           //the following two are connected/related; they are the same code for the x and y
 
-          if (posX > boardWidth - 35) {
+          if (posX > boardWidth - 128) {
             speedX *= -1
           }
 
-          if (posY > boardHeight - 35) {
+          if (posY > boardHeight - 64) {
             speedY *= -1
           }
 
