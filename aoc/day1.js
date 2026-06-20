@@ -1,5 +1,6 @@
 var notchPos = 50;
-console.log(notchPos);
+var arrayTest = [];
+var num0s = 0;
 
 function interpretDirection(string) {
   if (string[0] === "L") {
@@ -12,26 +13,46 @@ function interpretDirection(string) {
 function interpretValue(string) {
   if (string.length === 2) {
     return string[1];
-  } else if (string.length === 3) {
-    return string[1] + string[2];
-  } else if (string.length > 3) {
+  } else if (string.length >= 3) {
+    return string[string.length-2] + string[string.length-1];
   }
 }
 
-function updateNotch(direction, x) {
+function updateNotch(direction, value) {
+  var x
+  value = Number(value)
   if (direction === "left") {
-    notchPos = (notchPos + x) % 100;
+    x = (notchPos - value);
+    if (x < 0) {
+      x += 100
+    }
+    return x
   } else if (direction === "right") {
-    notchPos = (notchPos + x) % 100;
+    x = (notchPos + value) % 100;
+    return x
   }
 }
 
-function updateForHuman(string) {
-  console.log();
+function update(string) {
+  var originalPos = notchPos
+  var direction = interpretDirection(string)
+  var value = interpretValue(string)
+  var newPos = updateNotch(direction, value)
+  console.log("By turning the lock " + value + " ticks to the " + direction + " from " + originalPos + "th tick, it reaches the " + newPos + "th tick.")
+  if (newPos === 0) {
+    num0s++
+    console.log ("This brings the count of 0's to " + num0s + ".")
+  }
+  notchPos = newPos
 }
 
-function f(string) {
-  updateForHuman(string);
+function solve(array) {
+  for (var i = 0; i < array.length; i++){
+    update(array[i])
+  }
+  console.log("while the final tick was number " + notchPos + ", the actual password is " + num0s + ", as it is the number of times that the notch reached 0.")
 }
+
+solve(arrayTest)
 
 // in terminal run "node aoc/day1.js" (no quotes) to run the code and use the terminal as a console
