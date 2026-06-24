@@ -53,6 +53,26 @@ function solve(array) {
   console.log("while the final tick was number " + notchPos + ", the actual password is " + num0s + ", as it is the number of times that the notch reached 0.")
 }
 
-solve(arrayTest)
+// quickUpdate() is just update() without console.log().
 
-// in terminal run "node aoc/day1.js" (no quotes) to run the code and use the terminal as a console
+function quickUpdate (string) {
+  var originalPos = notchPos
+  var direction = interpretDirection(string)
+  var value = interpretValue(string)
+  var newPos = updateNotch(direction, value)
+  if (newPos === 0) {
+    num0s++
+  }
+  notchPos = newPos
+}
+
+//same here; quickSolve() is solve using quickUpdate().
+
+function quickSolve(array) {
+  for (var i = 0; i < array.length; i++){
+    quickUpdate(array[i])
+  }
+  console.log("while the final tick was number " + notchPos + ", the actual password is " + num0s + ", as it is the number of times that the notch reached 0.")
+}
+
+quickSolve(arrayTest)
