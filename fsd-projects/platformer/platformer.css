@@ -1,11 +1,21 @@
 body {
   margin: 0px;
+  background-color: #202737;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 canvas {
   background-color: lightblue;
   margin: 20px;
+  border-radius: 20px;
 }
+
+/* #canvas {
+width ratio: 1.8285714285714285
+height ratio: 1.92
+} */
 
 img {
   display: none;
